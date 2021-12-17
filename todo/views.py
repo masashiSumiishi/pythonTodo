@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView
 
 from django.urls import reverse_lazy
+from django.views.generic.edit import UpdateView
 
 from todo.models import Todo
 
@@ -15,6 +16,11 @@ class TodoDetail(DetailView):
     context_object_name = "task"
 
 class TodoCreate(CreateView):
+    model = Todo
+    fields = "__all__"
+    success_url = reverse_lazy("list")
+
+class TodoUpdate(UpdateView):
     model = Todo
     fields = "__all__"
     success_url = reverse_lazy("list")
